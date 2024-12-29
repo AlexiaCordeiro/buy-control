@@ -11,11 +11,12 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QListWidget>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -25,7 +26,7 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QPushButton *openAddWindow;
-    QListWidget *listItems;
+    QTableWidget *tableWidget;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -33,12 +34,12 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(800, 600);
+        MainWindow->resize(1110, 605);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         openAddWindow = new QPushButton(centralwidget);
         openAddWindow->setObjectName("openAddWindow");
-        openAddWindow->setGeometry(QRect(730, 520, 41, 31));
+        openAddWindow->setGeometry(QRect(980, 480, 41, 31));
         openAddWindow->setAutoFillBackground(true);
         openAddWindow->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    color: #fff; /* Text color */\n"
@@ -64,13 +65,19 @@ public:
 "}\n"
 ""));
         openAddWindow->setFlat(false);
-        listItems = new QListWidget(centralwidget);
-        listItems->setObjectName("listItems");
-        listItems->setGeometry(QRect(40, 30, 711, 192));
+        tableWidget = new QTableWidget(centralwidget);
+        if (tableWidget->columnCount() < 2)
+            tableWidget->setColumnCount(2);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        tableWidget->setObjectName("tableWidget");
+        tableWidget->setGeometry(QRect(180, 30, 761, 431));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 800, 22));
+        menubar->setGeometry(QRect(0, 0, 1110, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -88,6 +95,10 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         openAddWindow->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "Name", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QCoreApplication::translate("MainWindow", "Justification", nullptr));
     } // retranslateUi
 
 };

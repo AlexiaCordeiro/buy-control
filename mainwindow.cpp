@@ -23,32 +23,32 @@ MainWindow::MainWindow(QWidget *parent)
         return;
     }
 
-    QTextStream in(&file);
-    while (!in.atEnd()) {
-        QString line = in.readLine();
-        if (!line.isEmpty()) {
-            QListWidgetItem* item = new QListWidgetItem(line, ui->listItems);
-            ui->listItems->addItem(item);  // Use addItem instead of addItems
-            item->setFlags(item->flags() | Qt::ItemIsEditable);
-        }
-    }
+    // QTextStream in(&file);
+    // while (!in.atEnd()) {
+    //     QString line = in.readLine();
+    //     if (!line.isEmpty()) {
+    //         QListWidgetItem* item = new QListWidgetItem(line, ui->listItems);
+    //         ui->listItems->addItem(item);  // Use addItem instead of addItems
+    //         item->setFlags(item->flags() | Qt::ItemIsEditable);
+    //     }
+    // }
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 
-    QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "\\compras.txt");
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        QMessageBox::information(0, "Error", file.errorString());
-        return;
-    }
+    // QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "\\compras.txt");
+    // if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+    //     QMessageBox::information(0, "Error", file.errorString());
+    //     return;
+    // }
 
-    QTextStream out(&file);
+    // QTextStream out(&file);
 
-    for (int i = 0; i < ui->listItems->count(); ++i) {
-        out<<ui->listItems->item(i)->text()<<"\n";
-    }
+    // for (int i = 0; i < ui->tableWidget->columnCount(); ++i) {
+    //     out<<ui->listItems->item(i)->text()<<"\n";
+    // }
 
 }
 
@@ -63,17 +63,17 @@ void MainWindow::on_openAddWindow_clicked()
 
 void MainWindow::onTextReceived(const QString &name, const QString &just)
 {
-    // Construct the item text with HTML formatting
-    QString itemText = "<b>" + name + "</b><br>" + just;
-    QListWidgetItem *item = new QListWidgetItem(itemText, ui->listItems);
-    ui->listItems->addItem(item);  // Use addItem here as well
-    item->setFlags(item->flags() | Qt::ItemIsEditable);
+    int rowCount = ui->tableWidget->rowCount();
+    ui->tableWidget->insertRow(rowCount);
 
-    // Save the new item to the file
+    ui->tableWidget->setItem(rowCount, 0, new QTableWidgetItem(name));
+    ui->tableWidget->setItem(rowCount, 1, new QTableWidgetItem(just));
+
     QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "\\compras.txt");
     if (file.open(QIODevice::Append | QIODevice::Text)) {
         QTextStream out(&file);
-        out << itemText << "\n";
+        out << name << "\n";
+        out << just << "\n";
     } else {
         QMessageBox::information(0, "Error", file.errorString());
     }

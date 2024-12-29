@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1110</width>
+    <height>605</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="openAddWindow">
     <property name="geometry">
      <rect>
-      <x>730</x>
-      <y>520</y>
+      <x>980</x>
+      <y>480</y>
       <width>41</width>
       <height>31</height>
      </rect>
@@ -61,15 +61,25 @@ QPushButton:pressed {
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QListWidget" name="listItems">
+   <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>180</x>
       <y>30</y>
-      <width>711</width>
-      <height>192</height>
+      <width>761</width>
+      <height>431</height>
      </rect>
     </property>
+    <column>
+     <property name="text">
+      <string>Name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Justification</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -77,7 +87,7 @@ QPushButton:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1110</width>
      <height>22</height>
     </rect>
    </property>
